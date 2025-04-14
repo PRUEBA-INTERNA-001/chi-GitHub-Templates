@@ -54,7 +54,7 @@ on:
 jobs:
   BUILD:
     # Compila el proyecto con Ant y guarda artefactos
-    uses: asantander90/chi-GitHub-Functions-main/.github/workflows/buildAnt.yml@main
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/buildAnt.yml@main
     with:
       java_version: ${{ inputs.java_version }}
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
@@ -63,13 +63,13 @@ jobs:
   SONAR:
     needs: BUILD
     if: ${{ inputs.sonar_enabled }}  # <-- se evalúa directo como booleano
-    uses: asantander90/chi-GitHub-Functions-main/.github/workflows/sonarScan.yml@main
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
     secrets: inherit
     
   DEPLOY:
     needs: [BUILD, SONAR]
     if: ${{ !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
-    uses: asantander90/chi-GitHub-Functions-main/.github/workflows/deployWeblogic.yml@main
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
       artifacts_name: ${{ inputs.artifacts_name }}
