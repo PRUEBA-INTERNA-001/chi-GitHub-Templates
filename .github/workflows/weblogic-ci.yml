@@ -44,6 +44,10 @@ on:
         description: "Nombre lógico de la app WebLogic"
         required: true
         type: string
+      environment:
+        description: "Nombre del entorno GitHub (dev, homo, prod)"
+        required: true
+        type: string
       sonar_enabled:
         description: "Habilitar análisis SonarQube"
         required: false
@@ -78,6 +82,7 @@ jobs:
       weblogic_user: ${{ inputs.weblogic_user }}
       target_name: ${{ inputs.target_name }}
       app_name: ${{ inputs.app_name }}
+      environment: ${{ inputs.environment }}
     secrets: inherit
 
 
