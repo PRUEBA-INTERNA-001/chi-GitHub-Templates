@@ -51,15 +51,13 @@ on:
       sonar_enabled:
         description: "Habilitar análisis SonarQube"
         required: false
-        default: true  # <-- Sin comillas, valor booleano directo
-        type: boolean  # <-- Tipo definido como boolean
-
+        default: true
+        type: boolean
 
 jobs:
   DEPLOY:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
-      artifacts_pattern: ${{ inputs.artifacts_pattern }}
       artifacts_name: ${{ inputs.artifacts_name }}
       server_host: ${{ inputs.server_host }}
       server_port: ${{ inputs.server_port }}
@@ -68,5 +66,3 @@ jobs:
       app_name: ${{ inputs.app_name }}
       environment: ${{ inputs.environment }}
     secrets: inherit
-
-
