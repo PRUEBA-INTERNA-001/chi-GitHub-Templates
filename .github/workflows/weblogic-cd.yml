@@ -53,11 +53,16 @@ on:
         required: false
         default: true
         type: boolean
+      release_tag:
+        description: "Tag del release a descargar"
+        required: false
+        type: string
 
 jobs:
   DEPLOY:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
+      release_tag: ${{ inputs.release_tag }}
       artifacts_name: ${{ inputs.artifacts_name }}
       server_host: ${{ inputs.server_host }}
       server_port: ${{ inputs.server_port }}
