@@ -75,7 +75,6 @@ jobs:
     if: ${{ !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
-      artifacts_pattern: ${{ inputs.artifacts_pattern }}
       artifacts_name: ${{ inputs.artifacts_name }}
       server_host: ${{ inputs.server_host }}
       server_port: ${{ inputs.server_port }}
