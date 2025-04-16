@@ -84,3 +84,13 @@ jobs:
       environment: ${{ inputs.environment }}
     secrets: inherit
 
+  CREATE_RELEASE:
+    needs: [BUILD, SONAR, DEPLOY]
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
+    with:
+      artifacts_pattern: ${{ inputs.artifacts_pattern }}
+      artifacts_name: ${{ inputs.artifacts_name }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit
+
+
