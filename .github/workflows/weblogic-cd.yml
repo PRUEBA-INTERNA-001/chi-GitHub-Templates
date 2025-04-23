@@ -57,9 +57,22 @@ on:
         description: "Tag del release a descargar"
         required: false
         type: string
+      aprobacion_qa:
+        description: "Requiere aprobación QA antes de desplegar"
+        required: false
+        default: false
+        type: boolean
 
 jobs:
+  APROBACION-QA:
+    if: ${{ inputs.aprobacion_qa == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Esperando aprobación QA
+        run: echo "Esperando aprobación del equipo QA..."
+
   DEPLOY:
+    if: ${{ inputs.aprobacion_qa != true }}
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
       release_tag: ${{ inputs.release_tag }}
