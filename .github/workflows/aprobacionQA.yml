@@ -8,6 +8,10 @@ on:
         required: false
         default: false
         type: boolean
+      release_tag:
+        description: "Tag del release a descargar"
+        required: false
+        type: string
       environment:
         description: "Nombre del entorno GitHub (dev, homo, prod)"
         required: true
