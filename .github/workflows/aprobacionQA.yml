@@ -1,0 +1,24 @@
+name: Template Java Weblogic
+
+on:
+  workflow_call:
+    inputs:
+      aprobacion_qa:
+        description: "Requiere aprobación QA antes de desplegar"
+        required: false
+        default: false
+        type: boolean
+      environment:
+        description: "Nombre del entorno GitHub (dev, homo, prod)"
+        required: true
+        type: string
+
+jobs:
+  APROBACION-QA:
+    if: ${{ inputs.aprobacion_qa == true }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - name: Esperando aprobación QA
+        run: echo "Esperando aprobación del equipo QA..."
