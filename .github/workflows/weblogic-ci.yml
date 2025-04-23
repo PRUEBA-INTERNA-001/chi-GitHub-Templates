@@ -66,13 +66,13 @@ jobs:
   
   SONAR:
     needs: BUILD
-    if: ${{ inputs.sonar_enabled }}  # <-- se evalúa directo como booleano
+    if: ${{ inputs.environment == 'desarrollo' && inputs.sonar_enabled }} # <-- se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
     secrets: inherit
      
   DEPLOY:
     needs: [BUILD, SONAR]
-    if: ${{ !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
+    if: ${{ inputs.environment == 'desarrollo' && !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
       artifacts_name: ${{ inputs.artifacts_name }}
@@ -81,6 +81,16 @@ jobs:
       weblogic_user: ${{ inputs.weblogic_user }}
       target_name: ${{ inputs.target_name }}
       app_name: ${{ inputs.app_name }}
+      environment: ${{ inputs.environment }}
+    secrets: inherit
+
+  CREATE_RELEASE:
+    needs: [BUILD]
+    if: ${{ inputs.environment != 'desarrollo' }}
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
+    with:
+      artifacts_pattern: ${{ inputs.artifacts_pattern }}
+      artifacts_name: ${{ inputs.artifacts_name }}
       environment: ${{ inputs.environment }}
     secrets: inherit
 
