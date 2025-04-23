@@ -57,11 +57,6 @@ on:
         description: "Tag del release a descargar"
         required: false
         type: string
-      aprobacion_qa:
-        description: "Requiere aprobación QA antes de desplegar"
-        required: false
-        default: false
-        type: boolean
 
 jobs:
   DEPLOY:
