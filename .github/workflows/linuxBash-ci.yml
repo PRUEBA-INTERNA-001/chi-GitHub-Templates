@@ -17,11 +17,6 @@ on:
         required: false
         default: true  # <-- Sin comillas, valor booleano directo
         type: boolean  # <-- Tipo definido como boolean
-      path_destino:
-        description: 'Path destino donde se copiaran los archivos'
-        required: true
-        default: '/tmp'
-        type: string
 
 jobs:
   SONAR:
