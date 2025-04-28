@@ -22,27 +22,6 @@ on:
         required: true
         default: '/tmp'
         type: string
-      mask_include_files:
-        description: "Filtro de carpetas o archivos a copiar a destino"
-        required: false
-        default: '**/*'
-        type: string
-      pre_script_type:
-        description: "Tipo de script a utilizar sh o bat"
-        required: false
-        default: 'sh'
-        type: string
-      pre_script_path:
-        description: "Path del script a utilizar sh o bat"
-        required: false
-        default: 'scripts/preScript.sh'
-        type: string
-      servidores:
-        description: "Servidores donde se copiaran los archivos"
-        required: false
-        default: ''
-        type: string
-
 
 jobs:
   SONAR:
@@ -58,11 +37,6 @@ jobs:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/copyRecursiveFileTo.yml@main
     with:
       environment: ${{ inputs.environment }}
-      path_destino: ${{ inputs.path_destino }}
-      mask_include_files: ${{ inputs.mask_include_files }}
-      pre_script_type: ${{ inputs.pre_script_type }}
-      pre_script_path: ${{ inputs.pre_script_path }}
-      servidores: ${{ inputs.servidores }}
     secrets: inherit
 
   CREATE_RELEASE:
