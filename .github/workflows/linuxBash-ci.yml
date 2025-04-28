@@ -66,10 +66,11 @@ jobs:
     secrets: inherit
 
   CREATE_RELEASE:
-    needs: [SONAR, DEPLOY]
+    needs: [DEPLOY]
     if: ${{ inputs.environment != 'desarrollo' }}
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
       environment: ${{ inputs.environment }}
+      source_workflow: linuxBash-ci.yml  # <- Nombre del workflow que subió el artifact
     secrets: inherit
 

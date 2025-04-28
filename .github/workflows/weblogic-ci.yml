@@ -94,5 +94,6 @@ jobs:
       artifacts_pattern: ${{ inputs.artifacts_pattern }}
       artifacts_name: ${{ inputs.artifacts_name }}
       environment: ${{ inputs.environment }}
+      source_workflow: weblogic-ci.yml  # <- Nombre del workflow que subió el artifact
     secrets: inherit
 
