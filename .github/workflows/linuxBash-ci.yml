@@ -3,6 +3,11 @@ name: Template Linux bash
 on:
   workflow_call:
     inputs:
+      deploy_platform:
+        description: "Plataforma de despliegue"
+        required: true
+        default: "linux"
+        type: string
       environment:
         description: "Nombre del entorno GitHub (dev, homo, prod)"
         required: true
