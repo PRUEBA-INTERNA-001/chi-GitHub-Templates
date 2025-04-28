@@ -6,7 +6,7 @@ on:
       deploy_platform:
         description: "Plataforma de despliegue"
         required: true
-        default: "linux"
+        default: "wls"
         type: string
       artifacts_pattern:
         description: "Directorio o expresion regular que describe que se desea almacenar como artefacto"

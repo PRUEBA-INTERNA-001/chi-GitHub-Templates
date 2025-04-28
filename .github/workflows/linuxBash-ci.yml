@@ -48,6 +48,8 @@ jobs:
   SONAR:
     if: ${{ inputs.environment == 'desarrollo' && inputs.sonar_enabled }} # <-- se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
+    with:
+      deploy_platform: ${{ inputs.deploy_platform }}
     secrets: inherit
      
   DEPLOY:

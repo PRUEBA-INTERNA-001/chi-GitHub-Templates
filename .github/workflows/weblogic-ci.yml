@@ -6,7 +6,7 @@ on:
       deploy_platform:
         description: "Plataforma de despliegue"
         required: true
-        default: "linux"
+        default: "wls"
         type: string
       artifacts_pattern:
         description: "Directorio o expresion regular que describe que se desea almacenar como artefacto"
@@ -68,6 +68,8 @@ jobs:
     needs: BUILD
     if: ${{ inputs.environment == 'desarrollo' && inputs.sonar_enabled }} # <-- se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
+    with:
+      deploy_platform: ${{ inputs.deploy_platform }}
     secrets: inherit
      
   DEPLOY:
