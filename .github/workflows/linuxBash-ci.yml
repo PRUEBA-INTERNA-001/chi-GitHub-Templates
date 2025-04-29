@@ -17,10 +17,15 @@ on:
         required: false
         default: true  # <-- Sin comillas, valor booleano directo
         type: boolean  # <-- Tipo definido como boolean
+      create_release:
+        description: "Habilitar la creación del release"
+        required: false
+        default: true  # <-- Sin comillas, valor booleano directo
+        type: boolean  # <-- Tipo definido como boolean
 
 jobs:
   SONAR:
-    if: ${{ inputs.environment == 'desarrollo' && inputs.sonar_enabled }} # <-- se evalúa directo como booleano
+    if: ${{ inputs.sonar_enabled }} # <-- se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
     with:
       deploy_platform: ${{ inputs.deploy_platform }}
@@ -28,14 +33,13 @@ jobs:
      
   DEPLOY:
     needs: [SONAR]
-    if: ${{ inputs.environment == 'desarrollo' && !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/copyRecursiveFileTo.yml@main
     with:
       environment: ${{ inputs.environment }}
     secrets: inherit
 
   CREATE_RELEASE:
-    if: ${{ inputs.environment != 'desarrollo' }}
+    if: ${{ inputs.create_release }} # se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
       environment: ${{ inputs.environment }}

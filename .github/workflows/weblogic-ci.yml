@@ -53,7 +53,11 @@ on:
         required: false
         default: true  # <-- Sin comillas, valor booleano directo
         type: boolean  # <-- Tipo definido como boolean
-
+      create_release:
+        description: "Habilitar la creación del release"
+        required: false
+        default: true  # <-- Sin comillas, valor booleano directo
+        type: boolean  # <-- Tipo definido como boolean
 
 jobs:
   BUILD:
@@ -66,7 +70,7 @@ jobs:
   
   SONAR:
     needs: BUILD
-    if: ${{ inputs.environment == 'desarrollo' && inputs.sonar_enabled }} # <-- se evalúa directo como booleano
+    if: ${{ inputs.sonar_enabled }} # <-- se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/sonarScan.yml@main
     with:
       deploy_platform: ${{ inputs.deploy_platform }}
@@ -74,7 +78,6 @@ jobs:
      
   DEPLOY:
     needs: [BUILD, SONAR]
-    if: ${{ inputs.environment == 'desarrollo' && !inputs.sonar_enabled || needs.SONAR.result == 'success' }}  # <-- Lógica booleana
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
       artifacts_name: ${{ inputs.artifacts_name }}
@@ -88,7 +91,7 @@ jobs:
 
   CREATE_RELEASE:
     needs: [BUILD]
-    if: ${{ inputs.environment != 'desarrollo' }}
+    if: ${{ inputs.create_release }} # se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
       artifacts_pattern: ${{ inputs.artifacts_pattern }}

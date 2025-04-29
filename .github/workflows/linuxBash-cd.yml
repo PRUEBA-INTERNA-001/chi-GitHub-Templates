@@ -12,14 +12,14 @@ on:
         description: "Nombre del entorno GitHub (dev, homo, prod)"
         required: true
         type: string
-      sonar_enabled:
-        description: "Habilitar análisis SonarQube"
+      release_tag:
+        description: "Tag del release a descargar"
         required: false
-        default: true  # <-- Sin comillas, valor booleano directo
-        type: boolean  # <-- Tipo definido como boolean
+        type: string
 
-jobs:   
+jobs:
   DEPLOY:
+    name: Deploy
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/copyRecursiveFileTo.yml@main
     with:
       environment: ${{ inputs.environment }}

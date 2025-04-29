@@ -60,6 +60,7 @@ on:
 
 jobs:
   DEPLOY:
+    name: Deploy
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/deployWeblogic.yml@main
     with:
       release_tag: ${{ inputs.release_tag }}
