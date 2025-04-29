@@ -20,7 +20,7 @@ on:
       create_release:
         description: "Habilitar la creación del release"
         required: false
-        default: true  # <-- Sin comillas, valor booleano directo
+        default: false  # <-- Sin comillas, valor booleano directo
         type: boolean  # <-- Tipo definido como boolean
 
 jobs:
