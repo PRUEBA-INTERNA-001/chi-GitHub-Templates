@@ -35,7 +35,6 @@ jobs:
     secrets: inherit
 
   CREATE_RELEASE:
-    needs: [DEPLOY]
     if: ${{ inputs.environment != 'desarrollo' }}
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
