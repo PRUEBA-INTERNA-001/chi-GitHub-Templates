@@ -39,6 +39,5 @@ jobs:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
       environment: ${{ inputs.environment }}
-      source_workflow: copyRecursiveFileTo.yml  # <- Nombre del workflow que subió el artifact
     secrets: inherit
 
