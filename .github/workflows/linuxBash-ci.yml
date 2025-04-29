@@ -39,6 +39,7 @@ jobs:
     secrets: inherit
 
   CREATE_RELEASE:
+    needs: [DEPLOY]
     if: ${{ inputs.create_release }} # se evalúa directo como booleano
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/createRelease.yml@main
     with:
