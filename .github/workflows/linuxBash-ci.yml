@@ -5,7 +5,7 @@ on:
     inputs:
       deploy_platform:
         description: "Plataforma de despliegue"
-        required: true
+        required: false
         default: "linux"
         type: string
       environment:
