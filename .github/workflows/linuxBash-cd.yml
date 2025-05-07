@@ -23,5 +23,6 @@ jobs:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Functions/.github/workflows/copyRecursiveFileTo.yml@main
     with:
       environment: ${{ inputs.environment }}
+      release_tag: ${{ inputs.release_tag }}
     secrets: inherit
 
